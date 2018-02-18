@@ -1,0 +1,150 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Stephwin Slot Machine</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="jquery.slotmachine.css">
+    <link href="https://unpkg.com/basscss@7.1.1/css/basscss.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="jquery.slotmachine.js"></script>
+    <style>
+      .randomizeMachine {
+        height: 72px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+      .randomizeMachine h1 {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="gray regular center mt4 mb2">Randomize your stuff!</h1>
+
+    <div class="clearfix mx-auto center">
+      <div class="col col-6 px2">
+        <div id="machine1" class="randomizeMachine" style="overflow: hidden;">
+          <div class="slotMachineContainer js-shuffle" style="transition: 1s ease-in-out; transform: matrix(1, 0, 0, 1, 0, -100);">
+            <div><h1>Circus</h1></div>
+            <div><h1>Animal</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>Under the Sea</h1></div>
+            <div><h1>Nearest Holiday</h1></div>
+            <div><h1>Royal</h1></div>
+            <div><h1>Nature</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>British</h1></div>
+            <div><h1>Boozy</h1></div>
+            <div><h1>Celestial</h1></div>
+            <div><h1>Gluten-free</h1></div>
+            <div><h1>Standing Structure</h1></div>
+            <div><h1>Chocolate</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>Game Night</h1></div>
+            <div><h1>Hollywood</h1></div>
+            <div><h1>Literature</h1></div>
+            <div><h1>Colors</h1></div>
+            <div><h1>Deez Nuts</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>L.A.</h1></div>
+            <div><h1>90's</h1></div>
+            <div><h1>Citrus</h1></div>
+            <div><h1>Floral</h1></div>
+            <div><h1>Prehistoric</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>Designer</h1></div>
+            <div><h1>Hipster</h1></div>
+            <div><h1>Disney</h1></div>
+            <div><h1>Chetna</h1></div>
+            <div><h1>Puns</h1></div>
+            <div><h1>Fruit</h1></div>
+            <div><h1>Vegetable</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>Meat</h1></div>
+            <div><h1>Comic Book</h1></div>
+            <div><h1>Music</h1></div>
+            <div><h1>Paleo</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>Sugar-free</h1></div>
+            <div><h1>Inapprops</h1></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-6 px2">
+        <div id="machine2" class="randomizeMachine" style="overflow: hidden;">
+          <div class="slotMachineContainer js-shuffle" style="transition: 1s ease-in-out; transform: matrix(1, 0, 0, 1, 0, -200);">
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>Biscuits</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>Bread</h1></div>
+            <div><h1>Cake</h1></div>
+            <div><h1>Cookies</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>Scones</h1></div>
+            <div><h1>Handheld Desserts</h1></div>
+            <div><h1>Pie</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>Savory</h1></div>
+            <div><h1>Taco</h1></div>
+            <div><h1>Cocktail</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+            <div><h1>Creamy</h1></div>
+            <div><h1>Appetizer</h1></div>
+            <div><h1>Breakfast</h1></div>
+            <div><h1>Dealer's Choice</h1></div>
+          </div>
+        </div>
+      </div>
+
+      <a id="ranomizeButton" type="button" class="btn btn-primary">Shuffle</a>
+    <script>
+      $(document).ready(function(){
+
+        $.fn.shuffleChildren = function() {
+    $.each(this.get(), function(index, el) {
+        var $el = $(el);
+        var $find = $el.children();
+
+        $find.sort(function() {
+            return 0.5 - Math.random();
+        });
+
+        $el.empty();
+        $find.appendTo($el);
+    });
+        };
+
+
+        var machine1 = $("#machine1").slotMachine({
+          active: 0,
+          delay: 500
+        });
+
+        var machine2 = $("#machine2").slotMachine({
+          randomize : function(activeElementIndex){
+            return Math.random();
+          },
+          active: 0,
+          delay: 500,
+          direction: 'down'
+        });
+
+        $("#ranomizeButton").click(function(){
+          $(".js-shuffle").shuffleChildren();
+          machine1.shuffle(5);
+          setTimeout(function(){
+            machine2.shuffle(5);
+          }, 500);
+        })
+      });
+    </script>
+  </body>
+</html>
